@@ -140,8 +140,13 @@
                         </div>
                         <div class="relative w-full mb-2">
                             <div class="mb-2">
-                                <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
-                                    class="object-fill h-36 w-56 rounded border-2 border-gray-600">
+                                @if ($support->scanktp === null)
+                                    <img src="{{ Storage::url('public/noimage/') . 'no_image_available.jpeg' }}"
+                                        class="object-fill h-48 w-72 rounded border-2 border-gray-600 mb-2">
+                                @else
+                                    <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
+                                        class="object-fill h-36 w-56 rounded border-2 border-gray-600">
+                                @endif
                             </div>
                             <label for="scanktp" class="block uppercase text-xs font-bold mb-2">
                                 Re-Upload KTP
@@ -231,7 +236,7 @@
                             </label>
                             <select id="location" name="location"
                                 class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Pilihan</option>
+                                <option value="">Pilihan</option>
                                 @foreach ($locations as $location)
                                     <option value="{{ $location->id }}"
                                         @if ($support->location_id == $location->id) selected='selected' @endif>

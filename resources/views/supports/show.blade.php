@@ -9,9 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-4">
             <div class="grid grid-cols-4 gap-2">
                 <div class="col-span-3">
-                    <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
-                        class="object-fill h-48 w-72 rounded border-2 border-gray-600 mb-2">
-
+                    @if ($support->scanktp === null)
+                        <img src="{{ Storage::url('public/noimage/') . 'no_image_available.jpeg' }}"
+                            class="object-fill h-48 w-72 rounded border-2 border-gray-600 mb-2">
+                    @else
+                        <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
+                            class="object-fill h-48 w-72 rounded border-2 border-gray-600 mb-2">
+                    @endif
                     <ul class="max-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <li class="pb-3 sm:pb-4">
                             <div class="flex items-center space-x-4">
@@ -135,13 +139,10 @@
                 @if (!$support->parent_id)
                     <div class="rounded bg-gray-200">
                         <div class="p-2">
-                            <div class="flex flex-col gap-2 mb-2" x-data="{ show: true }">
-                                <div class="flex justify-between items-center mb-2 border-b-2 border-gray-600">
-                                    <h1 class="text-2xl text-gray-600 font-semibold mb-2">Families</h1>
-                                    <button @click="show = !show"
-                                        class="py-1.5 px-4 rounded bg-gray-600 hover:bg-gray-800 text-white text-sm">Add</button>
-                                </div>
-                                <div x-show="show">
+                            <div class="flex flex-col gap-2 mb-2">
+                                <h1 class="text-2xl text-gray-600 font-semibold mb-2 border-b-2 border-gray-600">
+                                    Families</h1>
+                                <div>
                                     <h1 class="mb-2 text-sm">Tambah Anggota Keluarga</h1>
                                     <div class="mb-2">
                                         <form action="{{ route('supports.searchanggota', $support->id) }}"
@@ -173,6 +174,11 @@
                             </div>
 
                             <div class="flex flex-col gap-2">
+                                @if ($message = Session::get('denied'))
+                                    <div class="alert alert-success alert-block">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @endif
                                 @foreach ($families as $family)
                                     <a href="{{ route('supports.show', $family->id) }}">
                                         <div class="flex items-center gap-2">

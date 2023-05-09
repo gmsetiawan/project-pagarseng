@@ -36,9 +36,6 @@
                                 TPS
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                No HP
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Image KTP
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -63,6 +60,7 @@
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
                                     <h1 class="whitespace-nowrap">{{ $family->nama }}</h1>
+                                    <h1>{{ $family->nohp }}</h1>
                                     <h1>{{ $family->alamat }}</h1>
                                 </td>
                                 <td class="px-6 py-4">
@@ -85,13 +83,20 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $family->nohp }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="{{ Storage::url('public/dataktp/') . $family->scanktp }}">
-                                        <img src="{{ Storage::url('public/dataktp/') . $family->scanktp }}"
-                                            class="object-cover h-10 w-20 rounded border-2 border-gray-600">
-                                    </a>
+                                    @if ($family->scanktp === null)
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                            <path
+                                                d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        </svg>
+                                    @else
+                                        <a href="{{ Storage::url('public/dataktp/') . $family->scanktp }}">
+                                            <img src="{{ Storage::url('public/dataktp/') . $family->scanktp }}"
+                                                class="object-cover h-10 w-20 rounded border-2 border-gray-600">
+                                        </a>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $family->participant->nama }}

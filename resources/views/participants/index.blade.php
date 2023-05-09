@@ -51,7 +51,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($participants as $participant)
+                        @forelse ($participants as $participant)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
@@ -90,8 +90,15 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
-
+                        @empty
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" colspan="3"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Data Participant Kosong! Silahkan lakukan penginputan data Participant.
+                                </th>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

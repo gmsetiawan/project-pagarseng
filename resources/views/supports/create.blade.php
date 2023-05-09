@@ -16,7 +16,7 @@
                                 <label for="nik" class="block uppercase text-xs font-bold mb-2">
                                     NIK
                                 </label>
-                                <input type="text" id="nik" name="nik" value="{{ old('nik') }}"
+                                <input type="number" id="nik" name="nik" value="{{ old('nik') }}"
                                     class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                                 @error('nik')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -59,7 +59,7 @@
                                 <label for="rt" class="block uppercase text-xs font-bold mb-2">
                                     RT
                                 </label>
-                                <input type="text" id="rt" name="rt" value="{{ old('rt') }}"
+                                <input type="number" id="rt" name="rt" value="{{ old('rt') }}"
                                     class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                                 @error('rt')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -134,14 +134,14 @@
                         </div>
 
                         <div class="relative w-full mb-2">
-                            <h3 class="uppercase text-xs font-bold mb-2">Kepercayaan</h3>
+                            <h3 class="uppercase text-xs font-bold mb-2">Rating Kepercayaan</h3>
                             <ul
                                 class="items-center w-96 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-license" type="radio" value="1"
-                                            name="rating" name="list-radio"
+                                            name="rating" name="list-radio" checked
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-license"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">1</label>
@@ -214,9 +214,10 @@
                             </label>
                             <select id="participant" name="participant"
                                 class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Pilihan</option>
+                                <option value="" selected>Pilihan</option>
                                 @foreach ($participants as $participant)
-                                    <option value="{{ $participant->id }}">{{ $participant->nama }}</option>
+                                    <option value="{{ $participant->id }}">
+                                        {{ $participant->nama }}</option>
                                 @endforeach
                             </select>
                             @error('participant')

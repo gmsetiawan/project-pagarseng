@@ -19,7 +19,7 @@
                 <div class="p-4 rounded bg-slate-200">
                     <div class="flex justify-between items-center gap-2">
                         <h1 class="font-semibold rounded mb-2">Kalkulasi Kecamatan</h1>
-                        <a href="#"
+                        <a href="{{ route('data.kecamatans') }}"
                             class="font-semibold rounded mb-2 text-blue-400 hover:text-blue-600 text-sm">Lihat
                             Semua</a>
                     </div>
@@ -61,7 +61,7 @@
                 <div class="p-4 rounded bg-slate-200">
                     <div class="flex justify-between items-center gap-2">
                         <h1 class="font-semibold rounded mb-2">Kalkulasi Kelurahan</h1>
-                        <a href="#"
+                        <a href="{{ route('data.kelurahans') }}"
                             class="font-semibold rounded mb-2 text-blue-400 hover:text-blue-600 text-sm">Lihat
                             Semua</a>
                     </div>

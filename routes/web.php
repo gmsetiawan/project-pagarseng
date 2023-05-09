@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalculationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\LocationController;
@@ -59,6 +60,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     route::resource('locations', LocationController::class);
     route::get('/search/location', [LocationController::class, 'search'])->name('locations.search');
+
+
+    route::get('show/data/kecamatans', [CalculationController::class, 'showallKecamatan'])->name('data.kecamatans');
+    route::get('show/data/kelurahans', [CalculationController::class, 'showallKelurahan'])->name('data.kelurahans');
 
 
     Route::get('/dropdown', [DropdownController::class, 'index']);

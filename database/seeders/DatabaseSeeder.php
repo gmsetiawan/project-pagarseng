@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         // $this->call(LocationSeeder::class);
-        $this->call(ParticipantSeeder::class);
+        // $this->call(ParticipantSeeder::class);
         $this->call(KabupatenKecamatanKelurahanSeeder::class);
         // $this->call(SupportSeeder::class);
     }
