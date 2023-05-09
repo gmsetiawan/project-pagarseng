@@ -91,4 +91,14 @@ class Support extends Model
     {
         return $this->hasMany(Support::class, 'parent_id');
     }
+
+    /**
+     * Get the parent associated with the Support
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function parent()
+    {
+        return $this->hasOne(Support::class, 'id', 'parent_id');
+    }
 }

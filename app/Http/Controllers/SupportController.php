@@ -315,8 +315,7 @@ class SupportController extends Controller
             )
             ->get();
         $family = Support::where('id', $support->parent_id)->first();
-        $anggota = Support::where('nik', $request->search)->first();
-        // dd($anggota);
+        $anggota = Support::with('children')->where('nik', $request->search)->first();
 
         return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
     }
@@ -324,7 +323,6 @@ class SupportController extends Controller
     public function addanggota(Request $request, Support $support)
     {
         $add = Support::where('id', $request->id)->first();
-
         $families = Support::query()
             ->when(
                 $support->id,
@@ -334,13 +332,14 @@ class SupportController extends Controller
             )
             ->get();
         $family = Support::where('id', $support->parent_id)->first();
+        $anggota = Support::where('nik', $request->search)->first();
 
         if ($add->id === $support->id) {
-            return view('supports.show', compact('support', 'families', 'family'))->with('denied', 'Add Anggota Successfully Denied');
+            return view('supports.show', compact('support', 'families', 'family', 'anggota'))->with('denied', 'Add Anggota Successfully Denied');
         } else {
             $add->parent_id = $support->id;
             $add->save();
-            return view('supports.show', compact('support', 'families', 'family'))->with('message', 'Add Anggota Successfully Added');
+            return redirect()->route('supports.show', compact('support', 'families', 'family', 'anggota'))->with('message', 'Add Anggota Successfully Added');
         }
     }
 

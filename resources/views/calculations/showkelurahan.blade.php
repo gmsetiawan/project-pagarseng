@@ -1,18 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('All Data Kalkulasi Kelurahan') }}
+            {{ __('Semua Kelurahan') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-4 rounded bg-slate-200">
-                <div class="flex justify-between items-center gap-2">
-                    <h1 class="font-semibold rounded mb-2">Kalkulasi Kelurahan</h1>
-                    <a href="#" class="font-semibold rounded mb-2 text-blue-400 hover:text-blue-600 text-sm">Lihat
-                        Semua</a>
-                </div>
+                <h1 class="font-semibold rounded mb-2">Kalkulasi Kelurahan</h1>
                 @forelse ($kelurahans as $kelurahan)
                     <div class="grid grid-cols-5 gap-4">
                         <div class="col-span-4 flex justify-between items-center">

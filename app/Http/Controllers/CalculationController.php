@@ -22,7 +22,7 @@ class CalculationController extends Controller
 
     public function showallKelurahan()
     {
-        $kelurahans = Kelurahan::withCount('supports')->get();
+        $kelurahans = Kelurahan::withCount('supports')->paginate(20);
         $kelratings = DB::table('supports')
             ->select('kelurahan_id', DB::raw('sum(rating) as sum_rating'), DB::raw('count(*) as rating_count'))
             ->groupBy('kelurahan_id')

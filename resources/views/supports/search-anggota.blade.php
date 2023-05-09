@@ -171,36 +171,75 @@
                                             </div>
                                         </form>
                                     </div>
+                                    {{-- {{ $anggota }} --}}
                                     @if ($anggota)
-                                        @if ($anggota->parent_id === $support->id)
+                                        @if ($anggota->parent_id)
                                             <p class="text-red-600 font-semibold text-sm">NIK ini sudah bergabung di
-                                                Group
-                                                ....</p>
+                                                Group <span
+                                                    class="underline underline-offset-4 italic uppercase">{{ $anggota->parent->nama }}</span>
+                                            </p>
                                         @else
-                                            <div class="text-sm">
-                                                <form
-                                                    action="{{ route('supports.addanggota', [$support->id, $anggota->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="hidden relative w-full mb-2">
-                                                        <input type="text" id="id" name="id"
-                                                            value="{{ old('id', $anggota->id) }}"
-                                                            class="w-full rounded" disabled>
-                                                    </div>
-                                                    <div class="flex justify-between items-center">
-                                                        <h1>NIK</h1>
-                                                        <h1>{{ $anggota->nik }}</h1>
-                                                    </div>
-                                                    <div class="flex justify-between items-center">
-                                                        <h1>Nama</h1>
-                                                        <h1>{{ $anggota->nama }}</h1>
-                                                    </div>
-                                                    <button
-                                                        class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
-                                                </form>
-                                            </div>
+                                            @if ($anggota->parent_id === $support->id)
+                                                <p class="text-red-600 font-semibold text-sm">NIK ini sudah bergabung
+                                                    di
+                                                    Group
+                                                    ....</p>
+                                            @elseif ($anggota->parent_id === 0)
+                                                <p class="text-red-600 font-semibold text-sm">NIK sudah sebagai group
+                                                    head
+                                                </p>
+                                            @elseif ($support->id === $anggota->id)
+                                                <p class="text-red-600 font-semibold text-sm">Tambah anggota tidak
+                                                    diperbolehkan dari sumber NIK yang sama</p>
+                                            @else
+                                                <div class="text-sm">
+                                                    <form
+                                                        action="{{ route('supports.addanggota', [$support->id, $anggota->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="hidden relative w-full mb-2">
+                                                            <input type="text" id="id" name="id"
+                                                                value="{{ old('id', $anggota->id) }}"
+                                                                class="w-full rounded" disabled>
+                                                        </div>
+                                                        <div class="flex justify-between items-center">
+                                                            <h1>NIK</h1>
+                                                            <h1>{{ $anggota->nik }}</h1>
+                                                        </div>
+                                                        <div class="flex justify-between items-center">
+                                                            <h1>Nama</h1>
+                                                            <h1>{{ $anggota->nama }}</h1>
+                                                        </div>
+                                                        <button
+                                                            class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
+                                                    </form>
+                                                </div>
+                                            @endif
                                         @endif
+                                        {{-- <div class="text-sm">
+                                            <form
+                                                action="{{ route('supports.addanggota', [$support->id, $anggota->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="hidden relative w-full mb-2">
+                                                    <input type="text" id="id" name="id"
+                                                        value="{{ old('id', $anggota->id) }}" class="w-full rounded"
+                                                        disabled>
+                                                </div>
+                                                <div class="flex justify-between items-center">
+                                                    <h1>NIK</h1>
+                                                    <h1>{{ $anggota->nik }}</h1>
+                                                </div>
+                                                <div class="flex justify-between items-center">
+                                                    <h1>Nama</h1>
+                                                    <h1>{{ $anggota->nama }}</h1>
+                                                </div>
+                                                <button
+                                                    class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
+                                            </form>
+                                        </div> --}}
                                     @else
                                         <h1 class="text-red-600 font-semibold text-sm">Data tidak ditemukan</h1>
                                     @endif
