@@ -73,7 +73,7 @@
                                         </svg>
                                     </a>
                                     <form action="{{ route('locations.destroy', $location->id) }}" method="POST"
-                                        onsubmit="return confirm(`Yakin! Lokasi {{ $location->nama }} Akan Di Hapus? `);"
+                                        onsubmit="return confirm('Apakah Lokasi Ini Akan Di Hapus?');"
                                         class="inline-flex items-center">
                                         @csrf
                                         @method('DELETE')
@@ -95,7 +95,7 @@
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" colspan="3"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Data TPS Tidak Ditemukan!
+                                    Data TPS Kosong!
                                 </th>
                             </tr>
                         @endforelse

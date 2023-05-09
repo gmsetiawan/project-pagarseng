@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Location TPS') }}
+            {{ __('Tambah Lokasi TPS') }}
         </h2>
     </x-slot>
 
@@ -34,7 +34,7 @@
                         <button type="submit"
                             class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="button">
-                            Submit
+                            Simpan
                         </button>
                     </form>
                 </div>

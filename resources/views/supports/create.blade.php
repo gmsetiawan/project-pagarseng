@@ -43,6 +43,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="grid grid-cols-6 gap-4">
                             <div class="relative w-full mb-2 col-span-5">
                                 <label for="alamat" class="block uppercase text-xs font-bold mb-2">
@@ -65,6 +66,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="grid grid-cols-3 gap-4">
                             <div class="relative w-full mb-2">
                                 <label for="kabupaten" class="block uppercase text-xs font-bold mb-2">
@@ -119,6 +121,7 @@
                                 <small class="alert alert-danger text-red-600">{{ $message }}</small>
                             @enderror
                         </div>
+
                         <div class="relative w-full mb-2">
                             <label for="keterangan" class="block uppercase text-xs font-bold mb-2">
                                 Keterangan
@@ -129,6 +132,7 @@
                                 <small class="alert alert-danger text-red-600">{{ $message }}</small>
                             @enderror
                         </div>
+
                         <div class="relative w-full mb-2">
                             <h3 class="uppercase text-xs font-bold mb-2">Kepercayaan</h3>
                             <ul
@@ -186,23 +190,11 @@
                             </ul>
 
                         </div>
+
                         <div class="relative w-full mb-2">
                             <label for="location" class="block uppercase text-xs font-bold mb-2">
                                 TPS
                             </label>
-                            {{-- <select id="location" name="location"
-                                class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="1">Pilihan</option>
-                                @php $firstIteration = true @endphp
-                                @foreach ($locations as $location)
-                                    @if ($firstIteration)
-                                        @php $firstIteration = false @endphp
-                                        @continue
-                                    @endif
-                                    <option value="{{ $location->id }}">{{ $location->nama }}
-                                    </option>
-                                @endforeach
-                            </select> --}}
                             <select id="location" name="location"
                                 class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Pilihan</option>
@@ -215,6 +207,7 @@
                                 <small class="alert alert-danger text-red-600">{{ $message }}</small>
                             @enderror
                         </div>
+
                         <div class="relative w-full mb-2">
                             <label for="participant" class="block uppercase text-xs font-bold mb-2">
                                 Sumber Data Dari
@@ -230,10 +223,11 @@
                                 <small class="alert alert-danger text-red-600">{{ $message }}</small>
                             @enderror
                         </div>
+
                         <button type="submit"
                             class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="button">
-                            Submit
+                            Simpan
                         </button>
                     </form>
                 </div>

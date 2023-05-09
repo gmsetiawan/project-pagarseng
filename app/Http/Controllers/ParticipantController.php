@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participant;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ParticipantController extends Controller
@@ -31,7 +32,7 @@ class ParticipantController extends Controller
     {
         $request->validate([
             'nama'              => 'required',
-            'nohp'              => 'required',
+            'nohp'              => 'required|min:10|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
         ]);
 
         Participant::create([
@@ -55,7 +56,7 @@ class ParticipantController extends Controller
      */
     public function edit(Participant $participant)
     {
-        //
+        return view('participants.edit', compact('participant'));
     }
 
     /**
@@ -63,7 +64,13 @@ class ParticipantController extends Controller
      */
     public function update(Request $request, Participant $participant)
     {
-        //
+        $updateparticipant = $request->validate([
+            'nama'              => 'required',
+            'nohp'              => 'required|min:10|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
+        ]);
+
+        $participant->update($updateparticipant);
+        return redirect()->route('participants.index')->with('message', 'Participant Successfully Updated');
     }
 
     /**
@@ -71,6 +78,21 @@ class ParticipantController extends Controller
      */
     public function destroy(Participant $participant)
     {
-        //
+        $participant->delete();
+        return redirect()->route('participants.index')->with('message', 'Participant Successfully Deleted');
+    }
+
+    public function search(Request $request)
+    {
+        $participants = Participant::query()
+            ->when(
+                $request->search,
+                function (Builder $builder) use ($request) {
+                    $builder->where('nama', 'like', "%{$request->search}%")
+                        ->orWhere('nohp', 'like', "%{$request->search}%");
+                }
+            )
+            ->get();
+        return view('participants.search', compact('participants'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -39,7 +40,7 @@ class LocationController extends Controller
             'alamat'            => $request->alamat,
         ]);
 
-        return redirect()->route('locations.index')->with('message', 'Location successfully Created');
+        return redirect()->route('locations.index')->with('message', 'Location Successfully Created');
     }
 
     /**
@@ -55,7 +56,7 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        //
+        return view('locations.edit', compact('location'));
     }
 
     /**
@@ -63,7 +64,13 @@ class LocationController extends Controller
      */
     public function update(Request $request, Location $location)
     {
-        //
+        $updatelocation = $request->validate([
+            'nama'              => 'required',
+            'alamat'            => 'required|max:128',
+        ]);
+
+        $location->update($updatelocation);
+        return redirect()->route('locations.index')->with('message', 'Location Successfully Updated');
     }
 
     /**
@@ -71,6 +78,21 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
-        //
+        $location->delete();
+        return redirect()->route('locations.index')->with('message', 'Location Successfully Deleted');
+    }
+
+    public function search(Request $request)
+    {
+        $locations = Location::query()
+            ->when(
+                $request->search,
+                function (Builder $builder) use ($request) {
+                    $builder->where('nama', 'like', "%{$request->search}%")
+                        ->orWhere('alamat', 'like', "%{$request->search}%");
+                }
+            )
+            ->get();
+        return view('locations.search', compact('locations'));
     }
 }

@@ -55,7 +55,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/supports/{support}/remove-parent', [SupportController::class, 'removeParent'])->name('supports.remove-parent');
 
     route::resource('participants', ParticipantController::class);
+    route::get('/search/participant', [ParticipantController::class, 'search'])->name('participants.search');
+
     route::resource('locations', LocationController::class);
+    route::get('/search/location', [LocationController::class, 'search'])->name('locations.search');
+
 
     Route::get('/dropdown', [DropdownController::class, 'index']);
     Route::post('api/fetch-kecamatan', [DropdownController::class, 'fetchKecamatan']);
