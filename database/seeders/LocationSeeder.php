@@ -13,10 +13,10 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
-        Location::create([
-            'nama' => '',
-            'alamat' => '',
-        ]);
+        // Location::create([
+        //     'nama' => '',
+        //     'alamat' => '',
+        // ]);
         Location::create([
             'nama' => 'TPS001',
             'alamat' => 'Alamat TPS 1',

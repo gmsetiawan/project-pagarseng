@@ -169,6 +169,39 @@
                                             </div>
                                         </form>
                                     </div>
+                                    @if ($anggota)
+                                        @if ($anggota->parent_id === $support->id)
+                                            <p class="text-red-600 font-semibold text-sm">NIK ini sudah bergabung di
+                                                Group
+                                                ....</p>
+                                        @else
+                                            <div class="text-sm">
+                                                <form
+                                                    action="{{ route('supports.addanggota', [$support->id, $anggota->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="relative w-full mb-2">
+                                                        <input type="text" id="id" name="id"
+                                                            value="{{ old('id', $anggota->id) }}"
+                                                            class="w-full rounded" disabled>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <h1>NIK</h1>
+                                                        <h1>{{ $anggota->nik }}</h1>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <h1>Nama</h1>
+                                                        <h1>{{ $anggota->nama }}</h1>
+                                                    </div>
+                                                    <button
+                                                        class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    @else
+                                        <h1 class="text-red-600 font-semibold text-sm">Data tidak ditemukan</h1>
+                                    @endif
                                 </div>
                             </div>
 
@@ -189,51 +222,6 @@
                     </div>
                 @endif
             </div>
-            {{-- <div>
-                <h1>Test</h1>
-                <div class="form-group">
-                    <label for="search">Search Support:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="search" name="search">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" id="search-btn">Search</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="search-results"></div>
-            </div> --}}
         </div>
     </div>
-    <script type="module">
-        $(document).ready(function() {
-            // Search for an support by ID
-            $('#search-btn').on('click', function() {
-                var nik = $('#search').val();
-                if (nik) {
-                    $.ajax({
-                        url: '{{ url('api/fetch-support') }}',
-                        type: 'GET',
-                        data: {
-                            nik: nik
-                        },
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data.status == 'success') {
-                                var support = data.support;
-                                var result = '<h2>Support Details</h2>';
-                                result += '<p>NIK: ' + support.nik + '</p>';
-                                result += '<p>Nama: ' + support.nama + '</p>';
-                                $('#search-results').html(result);
-                            } else {
-                                $('#search-results').html('<p>Support not found</p>');
-                            }
-                        }
-                    });
-                } else {
-                    $('#search-results').empty();
-                }
-            });
-        });
-    </script>
 </x-app-layout>

@@ -78,7 +78,11 @@
                                     {{ $family->kecamatan->nama }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $family->location->nama }}
+                                    @if ($family->location === null)
+                                        -
+                                    @else
+                                        {{ $family->location->nama }}
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $family->nohp }}

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kabupaten_id');
             $table->unsignedBigInteger('kecamatan_id');
             $table->unsignedBigInteger('kelurahan_id');
-            $table->string('scanktp');
+            $table->string('scanktp')->nullable();
             $table->string('nohp')->nullable();
             $table->string('keterangan')->nullable();
             $table->integer('rating');

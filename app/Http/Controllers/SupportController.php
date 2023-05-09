@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SupportUpdateRequest;
 use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\Location;
 use App\Models\Participant;
 use App\Models\Support;
@@ -11,7 +13,6 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class SupportController extends Controller
 {
@@ -46,11 +47,11 @@ class SupportController extends Controller
             'nik'               => 'required|unique:supports|min:16|max:16',
             'nama'              => 'required|max:128',
             'alamat'            => 'required|max:128',
-            'rt'                => 'required|max:4|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'rt'                => 'required|min:2|max:2|regex:/^([0-9\s\-\+\(\)]*)$/',
             'kabupaten'         => 'required',
             'kecamatan'         => 'required',
             'kelurahan'         => 'required',
-            'scanktp'           => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            'scanktp'           => 'image|mimes:jpeg,png,jpg|max:1024',
             'nohp'              => 'required|min:10|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
             'keterangan'        => 'nullable|max:128',
             'rating'            => 'required',
@@ -67,10 +68,26 @@ class SupportController extends Controller
                 'nama'              => $request->nama,
                 'alamat'            => $request->alamat,
                 'rt'                => $request->rt,
-                'kabupaten_id'         => $request->kabupaten,
-                'kecamatan_id'         => $request->kecamatan,
-                'kelurahan_id'         => $request->kelurahan,
+                'kabupaten_id'      => $request->kabupaten,
+                'kecamatan_id'      => $request->kecamatan,
+                'kelurahan_id'      => $request->kelurahan,
                 'scanktp'           => $namaktp,
+                'nohp'              => $request->nohp,
+                'keterangan'        => $request->keterangan,
+                'rating'            => $request->rating,
+                'location_id'       => $request->location,
+                'participant_id'    => $request->participant,
+                'user_id'           => Auth::id(),
+            ]);
+        } else {
+            Support::create([
+                'nik'               => $request->nik,
+                'nama'              => $request->nama,
+                'alamat'            => $request->alamat,
+                'rt'                => $request->rt,
+                'kabupaten_id'      => $request->kabupaten,
+                'kecamatan_id'      => $request->kecamatan,
+                'kelurahan_id'      => $request->kelurahan,
                 'nohp'              => $request->nohp,
                 'keterangan'        => $request->keterangan,
                 'rating'            => $request->rating,
@@ -88,7 +105,16 @@ class SupportController extends Controller
      */
     public function show(Support $support)
     {
-        return view('supports.show', compact('support'));
+        $families = Support::query()
+            ->when(
+                $support->id,
+                function (Builder $builder) use ($support) {
+                    $builder->Where('parent_id', $support->id);
+                }
+            )
+            ->get();
+        $family = Support::where('id', $support->parent_id)->first();
+        return view('supports.show', compact('support', 'families', 'family'));
     }
 
     /**
@@ -99,8 +125,10 @@ class SupportController extends Controller
         $locations = Location::all();
         $participants = Participant::all();
         $kabupatens = Kabupaten::get(["nama", "id"]);
-        $parentGroup = $support::where('id', $support->parent_id)->first();
-        return view('supports.edit', compact('support', 'locations', 'participants', 'kabupatens', 'parentGroup'));
+        $kecamatans = Kecamatan::where('kabupaten_id', $support->kabupaten_id)->get();
+        $kelurahans = Kelurahan::where('kecamatan_id', $support->kecamatan_id)->get();
+        $family = Support::where('id', $support->parent_id)->first();
+        return view('supports.edit', compact('support', 'locations', 'participants', 'kabupatens', 'kecamatans', 'kelurahans', 'family'));
     }
 
     /**
@@ -116,7 +144,7 @@ class SupportController extends Controller
             $scanktp->storeAs('public/dataktp', $namaktp);
 
             //delete old image
-            Storage::delete('public/articles/' . $support->scanktp);
+            Storage::delete('public/dataktp/' . $support->scanktp);
 
             $updateSupport['nik'] = $request->nik;
             $updateSupport['nama'] = $request->nama;
@@ -175,17 +203,18 @@ class SupportController extends Controller
     {
         $request->validate([
             'parent_id'         => 'required',
-            'nik'               => 'required|unique:supports',
+            'nik'               => 'required|unique:supports|min:16|max:16',
             'nama'              => 'required|max:128',
             'alamat'            => 'required|max:128',
-            'rt'                => 'required|max:4',
-            'kelurahan'         => 'required',
+            'rt'                => 'required|min:2|max:2|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'kabupaten'         => 'required',
             'kecamatan'         => 'required',
-            'scanktp'           => 'required|image|mimes:jpeg,png,jpg|max:1024',
-            'nohp'              => 'required|max:16',
-            'keterangan'        => 'max:128',
+            'kelurahan'         => 'required',
+            'scanktp'           => 'image|mimes:jpeg,png,jpg|max:1024',
+            'nohp'              => 'required|min:10|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'keterangan'        => 'nullable|max:128',
             'rating'            => 'required',
-            'location'          => 'required',
+            'location'          => 'nullable',
             'participant'       => 'required',
         ]);
 
@@ -199,9 +228,27 @@ class SupportController extends Controller
                 'nama'              => $request->nama,
                 'alamat'            => $request->alamat,
                 'rt'                => $request->rt,
-                'kelurahan'         => $request->kelurahan,
-                'kecamatan'         => $request->kecamatan,
+                'kabupaten_id'      => $request->kabupaten,
+                'kecamatan_id'      => $request->kecamatan,
+                'kelurahan_id'      => $request->kelurahan,
                 'scanktp'           => $namaktp,
+                'nohp'              => $request->nohp,
+                'keterangan'        => $request->keterangan,
+                'rating'            => $request->rating,
+                'location_id'       => $request->location,
+                'participant_id'    => $request->participant,
+                'user_id'           => Auth::id(),
+            ]);
+        } else {
+            Support::create([
+                'parent_id'         => $request->parent_id,
+                'nik'               => $request->nik,
+                'nama'              => $request->nama,
+                'alamat'            => $request->alamat,
+                'rt'                => $request->rt,
+                'kabupaten_id'      => $request->kabupaten,
+                'kecamatan_id'      => $request->kecamatan,
+                'kelurahan_id'      => $request->kelurahan,
                 'nohp'              => $request->nohp,
                 'keterangan'        => $request->keterangan,
                 'rating'            => $request->rating,
@@ -255,5 +302,61 @@ class SupportController extends Controller
         $support->save();
 
         return back();
+    }
+
+    public function searchanggota(Request $request, Support $support)
+    {
+        $families = Support::query()
+            ->when(
+                $support->id,
+                function (Builder $builder) use ($support) {
+                    $builder->Where('parent_id', $support->id);
+                }
+            )
+            ->get();
+        $family = Support::where('id', $support->parent_id)->first();
+        $anggota = Support::where('nik', $request->search)->first();
+        // dd($anggota);
+
+        return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
+    }
+
+    public function addanggota(Request $request, Support $support)
+    {
+        $add = Support::where('id', $request->id)->first();
+
+        $families = Support::query()
+            ->when(
+                $support->id,
+                function (Builder $builder) use ($support) {
+                    $builder->Where('parent_id', $support->id);
+                }
+            )
+            ->get();
+        $family = Support::where('id', $support->parent_id)->first();
+
+        if ($add->id === $support->id) {
+            return view('supports.show', compact('support', 'families', 'family'))->with('message', 'Add Anggota Successfully Denied');
+        } else {
+            $add->parent_id = $support->id;
+            $add->save();
+            return view('supports.show', compact('support', 'families', 'family'))->with('message', 'Add Anggota Successfully Added');
+        }
+    }
+
+    public function searchSupportByNIK(Request $request)
+    {
+        $support = Support::where('nik', $request->nik)->first();
+        if ($support) {
+            return response()->json([
+                'status' => 'success',
+                'support' => $support,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Support not found',
+            ]);
+        }
     }
 }

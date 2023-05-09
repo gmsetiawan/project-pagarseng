@@ -64,9 +64,6 @@
                                 TPS
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                No HP
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Info
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -152,6 +149,7 @@
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
                                     <h1 class="whitespace-nowrap">{{ $support->nama }}</h1>
+                                    <h1 class="whitespace-nowrap">{{ $support->nohp }}</h1>
                                     <h1>{{ $support->alamat }}</h1>
                                 </td>
                                 <td class="px-6 py-4">
@@ -167,10 +165,11 @@
                                     {{ $support->kelurahan->nama }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $support->location->nama }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $support->nohp }}
+                                    @if ($support->location === null)
+                                        -
+                                    @else
+                                        {{ $support->location->nama }}
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{-- {{ $families[0]->id }} --}}

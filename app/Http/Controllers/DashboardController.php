@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Participant;
+use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,15 +13,26 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $kecamatans = Kecamatan::withCount('supports')->get();
-        $ratings = DB::table('supports')
-            ->select('kecamatan_id', DB::raw('avg(rating) as average_rating'), DB::raw('count(*) as rating_count'))
+        $kecamatans = Kecamatan::withCount('supports')->take(5)->get();
+        $kecratings = DB::table('supports')
+            ->select('kecamatan_id', DB::raw('sum(rating) as sum_rating'), DB::raw('count(*) as rating_count'))
             ->groupBy('kecamatan_id')
-            ->get();
+            ->take(5)->get();
 
-        $kelurahans = Kelurahan::withCount('supports')->get();
-        $participants = Participant::withCount('supports')->get();
+        $kelurahans = Kelurahan::withCount('supports')->take(5)->get();
+        $kelratings = DB::table('supports')
+            ->select('kelurahan_id', DB::raw('sum(rating) as sum_rating'), DB::raw('count(*) as rating_count'))
+            ->groupBy('kelurahan_id')
+            ->take(5)->get();
 
-        return view('dashboard', compact('kecamatans', 'kelurahans', 'participants', 'ratings'));
+        $participants = Participant::withCount('supports')->take(5)->get();
+
+        // $reviews = Support::select('rating', DB::raw('count(kecamatan_id) as count'))
+        //     ->groupBy('rating')
+        //     ->get();
+
+        // $total = $reviews->sum('count');
+
+        return view('dashboard', compact('kecamatans', 'kelurahans', 'participants', 'kecratings', 'kelratings'));
     }
 }

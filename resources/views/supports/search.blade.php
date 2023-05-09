@@ -109,7 +109,11 @@
                                     {{ $support->kelurahan->nama }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $support->location->nama }}
+                                    @if ($support->location === null)
+                                        -
+                                    @else
+                                        {{ $support->location->nama }}
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $support->nohp }}

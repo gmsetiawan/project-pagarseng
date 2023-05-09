@@ -12,8 +12,7 @@
                     @if ($support->parent_id)
                         <div class="mb-6 p-4 bg-red-300 rounded">NIK ini telah bergabung di Grup Keluarga <span
                                 class="font-semibold">
-                                <a
-                                    href="{{ route('supports.showfamily', $support->parent_id) }}">{{ $parentGroup->nama }}</a>
+                                <a href="{{ route('supports.showfamily', $support->parent_id) }}">{{ $family->nama }}</a>
                             </span>
                         </div>
                     @endif
@@ -107,6 +106,13 @@
                                 </label>
                                 <select id="kecamatan-dropdown" name="kecamatan"
                                     class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">-- Pilih Kecamatan --</option>
+                                    @foreach ($kecamatans as $kecamatan)
+                                        <option value="{{ $kecamatan->id }}"
+                                            @if ($support->kecamatan_id == $kecamatan->id) selected='selected' @endif>
+                                            {{ $kecamatan->nama }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('kecamatan')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -115,10 +121,17 @@
 
                             <div class="relative w-full mb-2">
                                 <label for="kelurahan" class="block uppercase text-xs font-bold mb-2">
-                                    kelurahan
+                                    Kelurahan / Kampung
                                 </label>
                                 <select id="kelurahan-dropdown" name="kelurahan"
                                     class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">-- Pilih Kelurahan / Kampung --</option>
+                                    @foreach ($kelurahans as $kelurahan)
+                                        <option value="{{ $kelurahan->id }}"
+                                            @if ($support->kelurahan_id == $kelurahan->id) selected='selected' @endif>
+                                            {{ $kelurahan->nama }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('kelurahan')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -158,7 +171,8 @@
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-license" type="radio" value="1"
-                                            name="rating" name="list-radio"
+                                            {{ old('rating', $support->rating) == 1 ? 'checked' : '' }} name="rating"
+                                            name="list-radio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-license"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">1</label>
@@ -168,7 +182,8 @@
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-id" type="radio" value="2"
-                                            name="rating" name="list-radio"
+                                            {{ old('rating', $support->rating) == 2 ? 'checked' : '' }} name="rating"
+                                            name="list-radio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-id"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">2</label>
@@ -178,7 +193,8 @@
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-millitary" type="radio" value="3"
-                                            name="rating" name="list-radio"
+                                            {{ old('rating', $support->rating) == 3 ? 'checked' : '' }} name="rating"
+                                            name="list-radio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-millitary"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">3</label>
@@ -188,7 +204,8 @@
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-passport" type="radio" value="4"
-                                            name="rating" name="list-radio"
+                                            {{ old('rating', $support->rating) == 4 ? 'checked' : '' }} name="rating"
+                                            name="list-radio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-passport"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">4</label>
@@ -198,7 +215,8 @@
                                     class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-passport" type="radio" value="5"
-                                            name="rating" name="list-radio"
+                                            {{ old('rating', $support->rating) == 5 ? 'checked' : '' }} name="rating"
+                                            name="list-radio"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="horizontal-list-radio-passport"
                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">5</label>
@@ -251,7 +269,6 @@
             </div>
         </div>
     </div>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
     <script type="module">
 
         $(document).ready(function() {

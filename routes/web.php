@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     route::get('/users-search', [UserController::class, 'search'])->name('users.search');
 
     route::resource('supports', SupportController::class);
+    route::get('/supports/{support}/anggota', [SupportController::class, 'searchanggota'])->name('supports.searchanggota');
+    route::put('/supports/{support}/anggota/{id}', [SupportController::class, 'addanggota'])->name('supports.addanggota');
 
     route::get('/supports/{support}/family', [SupportController::class, 'showfamily'])->name('supports.showfamily');
     route::put('/supports/{support}/family', [SupportController::class, 'removerelation'])->name('supports.removerelation');
@@ -58,6 +60,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dropdown', [DropdownController::class, 'index']);
     Route::post('api/fetch-kecamatan', [DropdownController::class, 'fetchKecamatan']);
     Route::post('api/fetch-kelurahan', [DropdownController::class, 'fetchKelurahan']);
+
+    Route::get('api/fetch-support', [SupportController::class, 'searchSupportByNIK']);
 });
 
 require __DIR__ . '/auth.php';

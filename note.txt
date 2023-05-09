@@ -1,8 +1,19 @@
-Count berdasarkan Kel
-Count berdasarkan TPS
-Count berdasarkan SUMBER DATA
+Count berdasarkan Kel                                   DONE
+Count berdasarkan TPS                                   DONE
+Count berdasarkan SUMBER DATA                           DONE
 
-Dropdown 
+Dropdown                                                DONE
 - Kabupaten
 - Kecamatan
 - Kelurahan
+
+Review                                                  DONE
+Rate Trusted                                            DONE
+Relation Family                                         DONE
+Check if Support has Join to Family                     DONE
+Add Anggota to Family by show                           DONE
+
+Check Support ID Cannot Add Group at the same ID        Progress
+
+Check select location id for edit
+Set default radio button for new create support

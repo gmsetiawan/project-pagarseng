@@ -98,7 +98,7 @@
 
                             <div class="relative w-full mb-2">
                                 <label for="kelurahan" class="block uppercase text-xs font-bold mb-2">
-                                    kelurahan
+                                    Kelurahan / Kampung
                                 </label>
                                 <select id="kelurahan-dropdown" name="kelurahan"
                                     class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -190,7 +190,7 @@
                             <label for="location" class="block uppercase text-xs font-bold mb-2">
                                 TPS
                             </label>
-                            <select id="location" name="location"
+                            {{-- <select id="location" name="location"
                                 class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="1">Pilihan</option>
                                 @php $firstIteration = true @endphp
@@ -199,6 +199,14 @@
                                         @php $firstIteration = false @endphp
                                         @continue
                                     @endif
+                                    <option value="{{ $location->id }}">{{ $location->nama }}
+                                    </option>
+                                @endforeach
+                            </select> --}}
+                            <select id="location" name="location"
+                                class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="">Pilihan</option>
+                                @foreach ($locations as $location)
                                     <option value="{{ $location->id }}">{{ $location->nama }}
                                     </option>
                                 @endforeach

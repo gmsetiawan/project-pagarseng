@@ -14,19 +14,19 @@ class ParticipantSeeder extends Seeder
     public function run(): void
     {
         Participant::create([
-            'nama' => 'Nama Teman 1',
-            'nohp' => '081200010001',
+            'nama' => 'Agus Susanto',
+            'nohp' => '085392019252',
         ]);
         Participant::create([
-            'nama' => 'Nama Teman 2',
+            'nama' => 'Patris',
             'nohp' => '081200010002',
         ]);
         Participant::create([
-            'nama' => 'Nama Teman 3',
+            'nama' => 'Rian',
             'nohp' => '081200010003',
         ]);
         Participant::create([
-            'nama' => 'Nama Teman 4',
+            'nama' => 'Yunus',
             'nohp' => '081200010004',
         ]);
     }
