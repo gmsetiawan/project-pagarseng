@@ -153,7 +153,7 @@
                                                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
                                                     NIK</label>
                                                 <div class="relative w-full">
-                                                    <input type="search" id=location-search" name="search"
+                                                    <input type="number" id=location-search" name="search"
                                                         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                                                         placeholder="Masukan NIK" required>
                                                     <button type="submit"
@@ -184,10 +184,13 @@
                                                     di
                                                     Group
                                                     ....</p>
-                                            @elseif ($anggota->parent_id === 0)
-                                                <p class="text-red-600 font-semibold text-sm">NIK sudah sebagai group
-                                                    head
-                                                </p>
+                                            @elseif ($checkGroupHead)
+                                                @if ($anggota)
+                                                    <p class="text-red-600 font-semibold text-sm">NIK sudah sebagai
+                                                        group
+                                                        head
+                                                    </p>
+                                                @endif
                                             @elseif ($support->id === $anggota->id)
                                                 <p class="text-red-600 font-semibold text-sm">Tambah anggota tidak
                                                     diperbolehkan dari sumber NIK yang sama</p>
@@ -217,29 +220,6 @@
                                                 </div>
                                             @endif
                                         @endif
-                                        {{-- <div class="text-sm">
-                                            <form
-                                                action="{{ route('supports.addanggota', [$support->id, $anggota->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="hidden relative w-full mb-2">
-                                                    <input type="text" id="id" name="id"
-                                                        value="{{ old('id', $anggota->id) }}" class="w-full rounded"
-                                                        disabled>
-                                                </div>
-                                                <div class="flex justify-between items-center">
-                                                    <h1>NIK</h1>
-                                                    <h1>{{ $anggota->nik }}</h1>
-                                                </div>
-                                                <div class="flex justify-between items-center">
-                                                    <h1>Nama</h1>
-                                                    <h1>{{ $anggota->nama }}</h1>
-                                                </div>
-                                                <button
-                                                    class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
-                                            </form>
-                                        </div> --}}
                                     @else
                                         <h1 class="text-red-600 font-semibold text-sm">Data tidak ditemukan</h1>
                                     @endif

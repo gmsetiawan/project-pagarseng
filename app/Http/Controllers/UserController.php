@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Support;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -22,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -30,7 +33,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User Successfully Created');
     }
 
     /**
@@ -46,7 +61,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -54,7 +69,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $updateuser = $request->validate([
+            'name'                  => ['required', 'string', 'max:255'],
+            'bio'                   => ['max:128'],
+        ]);
+
+        $user->update($updateuser);
+        return back()->with('success', 'User successfully updated');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updatePassword(Request $request, User $user)
+    {
+        $validated = $request->validateWithBag('updatePassword', [
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ]);
+
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Successfully change password');
     }
 
     /**
@@ -62,7 +100,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user) {
+            $hasRelatedSupportData = Support::where('user_id', $user->id)->exists();
+
+            if ($hasRelatedSupportData) {
+                return back()->with('success', 'User has related supports and cannot be deleted');
+            }
+
+            $user->delete();
+
+            return back()->with('success', 'User Successfully Deleted');
+        }
     }
 
     public function search(Request $request)

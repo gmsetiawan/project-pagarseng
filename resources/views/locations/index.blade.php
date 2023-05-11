@@ -100,6 +100,13 @@
                             </tr>
                         @endforelse
                     </tbody>
+                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="row" colspan="14" class="px-6 py-3">
+                                Total TPS {{ $locations->count() }}
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

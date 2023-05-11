@@ -189,9 +189,16 @@
                             </tr>
                         @endforelse
                     </tbody>
+                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="row" colspan="14" class="px-6 py-3">
+                                Total Data {{ $supports->count() }}
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
-            <div class="px-4 py-2 bg-gray-700 rounded text-white">Total Data {{ $supports->count() }}</div>
+            {{-- <div class="px-4 py-2 bg-gray-700 rounded text-white">Total Data {{ $supports->count() }}</div> --}}
         </div>
     </div>
 </x-app-layout>

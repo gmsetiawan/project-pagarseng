@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     route::resource('users', UserController::class);
     route::get('/users-search', [UserController::class, 'search'])->name('users.search');
+    route::put('/users/{user}/change-password', [UserController::class, 'updatePassword'])->name('users.update-password');
 
     route::resource('supports', SupportController::class);
     route::get('/supports/{support}/anggota', [SupportController::class, 'searchanggota'])->name('supports.searchanggota');
@@ -64,6 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     route::get('show/data/kecamatans', [CalculationController::class, 'showallKecamatan'])->name('data.kecamatans');
     route::get('show/data/kelurahans', [CalculationController::class, 'showallKelurahan'])->name('data.kelurahans');
+    route::get('show/data/participants', [CalculationController::class, 'showallParticipant'])->name('data.participants');
 
 
     Route::get('/dropdown', [DropdownController::class, 'index']);

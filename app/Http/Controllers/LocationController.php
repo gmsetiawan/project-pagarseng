@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Support;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -78,8 +79,17 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
-        $location->delete();
-        return redirect()->route('locations.index')->with('message', 'Location Successfully Deleted');
+        if ($location) {
+            $hasRelatedSupportData = Support::where('location_id', $location->id)->exists();
+
+            if ($hasRelatedSupportData) {
+                return back()->with('success', 'User has related supports and cannot be deleted');
+            }
+
+            $location->delete();
+
+            return back()->with('success', 'Location Successfully Deleted');
+        }
     }
 
     public function search(Request $request)

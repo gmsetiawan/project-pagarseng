@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participant;
+use App\Models\Support;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -78,8 +79,17 @@ class ParticipantController extends Controller
      */
     public function destroy(Participant $participant)
     {
-        $participant->delete();
-        return redirect()->route('participants.index')->with('message', 'Participant Successfully Deleted');
+        if ($participant) {
+            $hasRelatedSupportData = Support::where('participant_id', $participant->id)->exists();
+
+            if ($hasRelatedSupportData) {
+                return back()->with('success', 'User has related supports and cannot be deleted');
+            }
+
+            $participant->delete();
+
+            return back()->with('success', 'Participant Successfully Deleted');
+        }
     }
 
     public function search(Request $request)

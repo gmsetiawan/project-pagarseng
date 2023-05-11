@@ -39,9 +39,9 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            {{-- <th scope="col" class="px-6 py-3">
                                 NO
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 py-3">
                                 NIK
                             </th>
@@ -81,10 +81,10 @@
                         @forelse ($supports as $support)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row"
+                                {{-- <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $loop->iteration }}
-                                </th>
+                                </th> --}}
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                     @if ($support->rating === 5)
@@ -124,8 +124,8 @@
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    class="text-yellow-400" fill="currentColor"
-                                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
+                                                    viewBox="0 0 16 16">
                                                     <path
                                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                                 </svg>
@@ -241,6 +241,22 @@
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                     </a>
+                                    <form action="{{ route('supports.destroy', $support->id) }}" method="POST"
+                                        onsubmit="return confirm(`Yakin! {{ $support->nama }} Akan Di Hapus? `);"
+                                        class="inline-flex items-center">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="font-medium text-white hover:text-red-400 hover:scale-125 duration-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                <path
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
@@ -248,15 +264,25 @@
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" colspan="14"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Data Kosong! Silahkan lakukan penginputan data dan pastikan data participant dan TPS
+                                    Data Kosong! Silahkan lakukan penginputan data dan pastikan data participant
                                     sudah dilakukan penginputan terlebih dahulu.
                                 </th>
                             </tr>
                         @endforelse
                     </tbody>
+                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="row" colspan="14" class="px-6 py-3">
+                                Total Data Terkumpul {{ $totalData->count() }}
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
-            <div class="px-4 py-2 bg-gray-700 rounded text-white">Total Data {{ $totalData->count() }}</div>
+
+            @if ($totalData->count() > 10)
+                <div class="px-4 py-2 bg-gray-200 rounded text-white">{{ $supports->links() }}</div>
+            @endif
         </div>
     </div>
 </x-app-layout>

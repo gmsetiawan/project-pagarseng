@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 class SupportController extends Controller
 {
     /**
@@ -23,7 +25,9 @@ class SupportController extends Controller
     {
         $totalData = Support::all();
         $collection = collect(Support::class::all());
-        $supports = $collection->whereNull('parent_id');
+        // $supports = $collection->whereNull('parent_id')->paginate();
+        $supports =  Support::whereNull('parent_id')->orderBy('id', 'asc')->paginate(10);
+
         return view('supports.index', compact('supports', 'totalData'));
     }
 
@@ -97,7 +101,7 @@ class SupportController extends Controller
             ]);
         }
 
-        return redirect()->route('supports.index')->with('message', 'Support Successfully Created');
+        return redirect()->route('supports.index')->with('success', 'Support Successfully Created');
     }
 
     /**
@@ -180,7 +184,7 @@ class SupportController extends Controller
             $support->update($updateSupport);
         }
 
-        return redirect()->route('supports.index')->with('message', 'Support Successfully Updated');
+        return redirect()->route('supports.index')->with('success', 'Support Successfully Updated');
     }
 
     /**
@@ -188,7 +192,17 @@ class SupportController extends Controller
      */
     public function destroy(Support $support)
     {
-        //
+        $checkGroupHead = Support::where('id', $support->id)->has('children')->first();
+
+        if ($checkGroupHead) {
+            return redirect()->route('supports.index')->with('success', 'Group Head Cannot Delete Because Still Have Relation With Another Supports');
+        } else {
+            if ($support->scanktp !== "example.jpg") {
+                Storage::delete('public/dataktp/' . $support->scanktp);
+            }
+            $support->delete();
+            return redirect()->route('supports.index')->with('success', 'Support Successfully Deleted');
+        }
     }
 
     public function relation(Support $support)
@@ -280,8 +294,11 @@ class SupportController extends Controller
      */
     public function showfamily(Support $support, Request $request)
     {
-        // $families = collect(Support::class::all());
-        // $families = $collection->where('parent_id' === $support->id)->where('id' === $support->id);
+        $checkGroupHead = Support::where('id', $support->id)->has('children')->first();
+
+        if (!$checkGroupHead) {
+            return redirect()->route('supports.index');
+        }
 
         $families = Support::query()
             ->when(
@@ -293,15 +310,20 @@ class SupportController extends Controller
             )
             ->simplePaginate(5);
 
-        return view('supports.family', compact('families'));
+        return view('supports.family', compact('families', 'checkGroupHead'));
     }
 
     public function removerelation(Support $support)
     {
-        $support->parent_id = null;
-        $support->save();
+        $checkGroupHead = Support::where('id', $support->id)->has('children')->first();
+        if ($checkGroupHead) {
+            return back()->with('success', 'Group Head Cannot Delete Because Still Have Relation With Another Supports');
+        } else {
+            $support->parent_id = null;
+            $support->save();
 
-        return back();
+            return back()->with('success', 'Support Successfully Remove By Group');
+        }
     }
 
     public function searchanggota(Request $request, Support $support)
@@ -315,9 +337,28 @@ class SupportController extends Controller
             )
             ->get();
         $family = Support::where('id', $support->parent_id)->first();
-        $anggota = Support::with('children')->where('nik', $request->search)->first();
+        // $anggota = Support::with('children')->where('nik', $request->search)->first();
+        // $checkGroupHead = Support::where('id', $anggota->id)->has('children')->first();
 
-        return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
+        $anggota = Support::with('children')->where('nik', $request->search)->first();
+        if ($anggota) {
+            $checkGroupHead = Support::where('id', $anggota->id)->has('children')->first();
+            // other code here
+            return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota', 'checkGroupHead'));
+        } else {
+            return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
+        }
+
+
+
+        // if ($checkData) {
+        //     // dd('YA');
+        //     return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
+        //     // return redirect()->route('supports.show', compact('support', 'families', 'family', 'anggota'))->with('message', 'Add Anggota Successfully Added');
+        // } else {
+        //     // dd('TIDAK');
+        //     return view('supports.search-anggota', compact('support', 'families', 'family', 'anggota'));
+        // }
     }
 
     public function addanggota(Request $request, Support $support)
@@ -335,11 +376,11 @@ class SupportController extends Controller
         $anggota = Support::where('nik', $request->search)->first();
 
         if ($add->id === $support->id) {
-            return view('supports.show', compact('support', 'families', 'family', 'anggota'))->with('denied', 'Add Anggota Successfully Denied');
+            return view('supports.show', compact('support', 'families', 'family', 'anggota'))->with('error', 'Rejected');
         } else {
             $add->parent_id = $support->id;
             $add->save();
-            return redirect()->route('supports.show', compact('support', 'families', 'family', 'anggota'))->with('message', 'Add Anggota Successfully Added');
+            return redirect()->route('supports.show', compact('support', 'families', 'family', 'anggota'))->with('success', 'Support Successfully Added');
         }
     }
 

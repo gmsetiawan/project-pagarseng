@@ -13,7 +13,12 @@ Relation Family                                         DONE
 Check if Support has Join to Family                     DONE
 Add Anggota to Family by show                           DONE
 
-Check Support ID Cannot Add Group at the same ID        Progress
+Check Support ID Cannot Add Group at the same ID        DONE
 
-Check select location id for edit
-Set default radio button for new create support
+Check select location id for edit                       DONE
+Set default radio button for new create support         DONE
+
+Check if parent ID is Group cannot Create New Family    DONE
+
+CheckID if ID OnGroup Not found                         Progress
+Showing Flash Message When Remove Support ar Group      Progress
