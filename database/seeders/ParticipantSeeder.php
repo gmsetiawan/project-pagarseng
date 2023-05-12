@@ -18,16 +18,12 @@ class ParticipantSeeder extends Seeder
             'nohp' => '085392019252',
         ]);
         Participant::create([
-            'nama' => 'Patris',
-            'nohp' => '081200010002',
+            'nama' => 'Puyan',
+            'nohp' => '081200010001',
         ]);
         Participant::create([
-            'nama' => 'Rian',
-            'nohp' => '081200010003',
-        ]);
-        Participant::create([
-            'nama' => 'Yunus',
-            'nohp' => '081200010004',
+            'nama' => 'Aco',
+            'nohp' => '081200020002',
         ]);
     }
 }

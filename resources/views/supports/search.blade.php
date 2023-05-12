@@ -39,9 +39,6 @@
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                NO
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 NIK
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -82,10 +79,65 @@
                     <tbody>
                         @forelse ($supports as $support)
                             <tr class="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-                                    {{ $loop->iteration }}
-                                </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap">
+                                    @if ($support->rating === 5)
+                                        <div class="flex gap-1 mb-1">
+                                            @for ($i = 0; $i < $support->rating; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                                    class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    @elseif ($support->rating === 4)
+                                        <div class="flex gap-1 mb-1">
+                                            @for ($i = 0; $i < $support->rating; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                                    class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    @elseif ($support->rating === 3)
+                                        <div class="flex gap-1 mb-1">
+                                            @for ($i = 0; $i < $support->rating; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                                    class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    @elseif ($support->rating === 2)
+                                        <div class="flex gap-1 mb-1">
+                                            @for ($i = 0; $i < $support->rating; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                                    class="text-yellow-400" fill="currentColor"
+                                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    @elseif ($support->rating === 1)
+                                        <div class="flex gap-1 mb-1">
+                                            @for ($i = 0; $i < $support->rating; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                                    class="text-yellow-400" fill="currentColor"
+                                                    class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                    @else
+                                        <div class="flex gap-1 mb-1"></div>
+                                    @endif
                                     {{ $support->nik }}
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
@@ -116,17 +168,41 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if ($support->children->isEmpty())
-                                        <h1>{{ __('Perorangan') }}</h1>
+                                        <h1>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                            </svg>
+                                        </h1>
                                     @else
-                                        <a class="text-yellow-400 hover:text-yellow-600"
-                                            href="{{ route('supports.showfamily', $support->id) }}">{{ __('Keluarga - ' . $support->children->count()) }}</a>
+                                        <a class="text-yellow-400 hover:text-yellow-600 inline-flex items-center gap-1"
+                                            href="{{ route('supports.showfamily', $support->id) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                            </svg>
+                                            {{ __('- ' . $support->children->count()) }}
+                                        </a>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="{{ Storage::url('public/dataktp/') . $support->scanktp }}">
-                                        <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
-                                            class="object-cover h-10 w-20 rounded border-2 border-gray-600">
-                                    </a>
+                                    @if ($support->scanktp === null)
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            fill="currentColor" class="bi bi-person-bounding-box"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        </svg>
+                                    @else
+                                        <a href="{{ Storage::url('public/dataktp/') . $support->scanktp }}">
+                                            <img src="{{ Storage::url('public/dataktp/') . $support->scanktp }}"
+                                                class="object-cover h-10 w-20 rounded border-2 border-gray-600">
+                                        </a>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $support->participant->nama }}

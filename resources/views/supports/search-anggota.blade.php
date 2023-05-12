@@ -174,8 +174,10 @@
                                     @if ($anggota)
                                         @if ($anggota->parent_id)
                                             <p class="text-red-600 font-semibold text-sm">NIK ini sudah bergabung di
-                                                Group <span
-                                                    class="underline underline-offset-4 italic uppercase">{{ $anggota->parent->nama }}</span>
+                                                Group <span class="underline underline-offset-4 italic uppercase">
+                                                    <a
+                                                        href="{{ route('supports.showfamily', $anggota->parent->id) }}">{{ $anggota->parent->nama }}</a>
+                                                </span>
                                             </p>
                                         @else
                                             @if ($anggota->parent_id === $support->id)
@@ -185,9 +187,8 @@
                                                     ....</p>
                                             @elseif ($checkGroupHead)
                                                 @if ($anggota)
-                                                    <p class="text-red-600 font-semibold text-sm">NIK sudah sebagai
-                                                        group
-                                                        head
+                                                    <p class="text-red-600 font-semibold text-sm">NIK terdata sebagai
+                                                        group head
                                                     </p>
                                                 @endif
                                             @elseif ($support->id === $anggota->id)

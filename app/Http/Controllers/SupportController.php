@@ -304,11 +304,11 @@ class SupportController extends Controller
             ->when(
                 $support->id,
                 function (Builder $builder) use ($request, $support) {
-                    $builder->where('id', 'like', "%{$support->id}%")
-                        ->orWhere('parent_id', 'like', "%{$support->id}%");
+                    $builder->where('id', $support->id)
+                        ->orWhere('parent_id', $support->id);
                 }
             )
-            ->simplePaginate(5);
+            ->get();
 
         return view('supports.family', compact('families', 'checkGroupHead'));
     }
