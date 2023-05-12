@@ -207,7 +207,10 @@
                                 class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Pilihan</option>
                                 @foreach ($locations as $location)
-                                    <option value="{{ $location->id }}">{{ $location->nama }}</option>
+                                    <option value="{{ $location->id }}"
+                                        {{ $location->id == old('location') ? 'selected' : '' }}>
+                                        {{ $location->nama }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('location')
@@ -222,7 +225,10 @@
                                 class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" selected>Pilihan</option>
                                 @foreach ($participants as $participant)
-                                    <option value="{{ $participant->id }}">{{ $participant->nama }}</option>
+                                    <option value="{{ $participant->id }}"
+                                        {{ $participant->id == old('participant') ? 'selected' : '' }}>
+                                        {{ $participant->nama }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('participant')

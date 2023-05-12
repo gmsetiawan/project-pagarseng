@@ -26,7 +26,7 @@ class SupportController extends Controller
         $totalData = Support::all();
         $collection = collect(Support::class::all());
         // $supports = $collection->whereNull('parent_id')->paginate();
-        $supports =  Support::whereNull('parent_id')->orderBy('id', 'asc')->paginate(10);
+        $supports =  Support::whereNull('parent_id')->orderBy('id', 'desc')->paginate(10);
 
         return view('supports.index', compact('supports', 'totalData'));
     }
