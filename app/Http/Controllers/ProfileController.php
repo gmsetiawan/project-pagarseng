@@ -54,7 +54,7 @@ class ProfileController extends Controller
             $hasRelatedSupportData = Support::where('user_id', $user->id)->exists();
 
             if ($hasRelatedSupportData) {
-                return back()->with('success', 'Participant has related supports and cannot be deleted');
+                return back()->with('success', 'User Tidak Dapat Dihapus Karena Terelasi Dengan Data Support Lainnya');
             }
 
             Auth::logout();

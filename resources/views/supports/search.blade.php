@@ -1,33 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Supports Page') }}
+            {{ __('Supports') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-[1600px] mx-auto sm:px-6 lg:px-8 flex flex-col gap-4">
             <a href="{{ route('supports.create') }}"
-                class="self-end p-2 text-white text-sm rounded bg-green-600 hover:bg-green-700">Add New</a>
+                class="self-end p-2 text-white text-sm rounded bg-green-600 hover:bg-green-700">Tambah Support</a>
             <div>
                 <form action="{{ route('supports.search') }}" method="GET">
-                    <label for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
                         <input type="search" id="default-search" name="search"
-                            class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block w-full p-4 pl-10 text-sm border rounded bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Search By NIK, Nama..." required>
                         <button type="submit"
-                            class="text-white absolute right-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            class="text-white absolute right-2.5 bottom-2 focus:ring-4 focus:outline-none font-medium rounded text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -36,8 +35,8 @@
                 </form>
             </div>
             <div class="relative overflow-x-auto shadow-md rounded">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 NO
@@ -82,14 +81,11 @@
                     </thead>
                     <tbody>
                         @forelse ($supports as $support)
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr class="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
                                     {{ $loop->iteration }}
                                 </th>
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap">
                                     {{ $support->nik }}
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
@@ -119,23 +115,12 @@
                                     {{ $support->nohp }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{-- {{ $families[0]->id }} --}}
                                     @if ($support->children->isEmpty())
-                                        {{-- @if ($support->children)
-                                            @forelse ($support->children as $item)
-                                                <h1>{{ $item->id }}</h1>
-                                            @empty
-                                                {{ __('Anggota') }}
-                                            @endforelse
-                                        @else
-                                        @endif --}}
                                         <h1>{{ __('Perorangan') }}</h1>
                                     @else
                                         <a class="text-yellow-400 hover:text-yellow-600"
                                             href="{{ route('supports.showfamily', $support->id) }}">{{ __('Keluarga - ' . $support->children->count()) }}</a>
                                     @endif
-
-                                    {{-- {{ $families }} --}}
                                 </td>
                                 <td class="px-6 py-4">
                                     <a href="{{ Storage::url('public/dataktp/') . $support->scanktp }}">
@@ -147,16 +132,18 @@
                                     {{ $support->participant->nama }}
                                 </td>
                                 <td class="px-6 py-4 text-right flex flex-col gap-2">
-                                    <a href="{{ route('supports.relation', $support->id) }}"
-                                        class="font-medium text-blue-400 hover:text-blue-600 hover:scale-125 duration-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
-                                            <path
-                                                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                            <path
-                                                d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
-                                        </svg>
-                                    </a>
+                                    @if (!$support->parent_id)
+                                        <a href="{{ route('supports.relation', $support->id) }}"
+                                            class="font-medium text-blue-400 hover:text-blue-600 hover:scale-125 duration-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                                                <path
+                                                    d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+                                            </svg>
+                                        </a>
+                                    @endif
                                     <a href="{{ route('supports.show', $support->id) }}"
                                         class="font-medium text-green-400 hover:text-green-600 hover:scale-125 duration-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -180,16 +167,15 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
                                 <th scope="row" colspan="14"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    class="px-6 py-4 font-medium whitespace-nowrap text-white">
                                     Data pencarian Support tidak ditemukan!
                                 </th>
                             </tr>
                         @endforelse
                     </tbody>
-                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tfoot class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th scope="row" colspan="14" class="px-6 py-3">
                                 Total Data {{ $supports->count() }}
@@ -198,7 +184,6 @@
                     </tfoot>
                 </table>
             </div>
-            {{-- <div class="px-4 py-2 bg-gray-700 rounded text-white">Total Data {{ $supports->count() }}</div> --}}
         </div>
     </div>
 </x-app-layout>

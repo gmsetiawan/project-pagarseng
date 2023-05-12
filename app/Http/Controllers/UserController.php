@@ -45,7 +45,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User Successfully Created');
+        return redirect()->route('users.index')->with('success', 'User Berhasil Disimpan');
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
         ]);
 
         $user->update($updateuser);
-        return back()->with('success', 'User successfully updated');
+        return back()->with('success', 'User Berhasil Diperbaharui');
     }
 
     /**
@@ -92,7 +92,7 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Successfully change password');
+        return redirect()->route('users.index')->with('success', 'Password Berhasil Diperbaharui');
     }
 
     /**
@@ -104,12 +104,12 @@ class UserController extends Controller
             $hasRelatedSupportData = Support::where('user_id', $user->id)->exists();
 
             if ($hasRelatedSupportData) {
-                return back()->with('success', 'User has related supports and cannot be deleted');
+                return back()->with('success', 'User Tidak Dapat Dihapus Karena Terelasi Dengan Data Support Lainnya');
             }
 
             $user->delete();
 
-            return back()->with('success', 'User Successfully Deleted');
+            return back()->with('success', 'User Berhasil Dihapus');
         }
     }
 

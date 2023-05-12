@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Support Detail Page') }}
+            {{ __('Support Detail') }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,7 @@
                             class="object-fill h-48 w-72 rounded border-2 border-gray-600 mb-2">
                     @endif
 
-                    <ul class="max-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <ul class="max-w-full divide-y divide-gray-700">
                         <li class="pb-3 sm:pb-4">
                             <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0">
@@ -85,7 +85,7 @@
                             </div>
                         </li>
 
-                        <li class="pt-3 pb-0 sm:pt-4">
+                        <li class="py-3 sm:py-4">
                             <div class="flex items-center space-x-4">
                                 <div class="flex-shrink-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -142,7 +142,7 @@
                         <div class="p-2">
                             <div class="flex flex-col gap-2 mb-2">
                                 <h1 class="text-2xl text-gray-600 font-semibold mb-2 border-b-2 border-gray-600">
-                                    Families</h1>
+                                    Keluarga</h1>
                                 <div>
                                     <h1 class="mb-2 text-sm">Tambah Anggota Keluarga</h1>
                                     <div class="mb-2">
@@ -150,14 +150,14 @@
                                             method="GET">
                                             <div class="flex">
                                                 <label for="location-search"
-                                                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
+                                                    class="mb-2 text-sm font-medium sr-only text-white">Your
                                                     NIK</label>
                                                 <div class="relative w-full">
                                                     <input type="number" id=location-search" name="search"
-                                                        class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                                        class="block p-2.5 w-full z-20 text-sm rounded border-l-2 border focus:ring-blue-500 bg-gray-700 border-l-gray-700  border-gray-600 placeholder-gray-400 text-white focus:border-blue-500"
                                                         placeholder="Masukan NIK" required>
                                                     <button type="submit"
-                                                        class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white rounded-r border border-blue-700 focus:ring-4 focus:outline-none bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
                                                         <svg aria-hidden="true" class="w-5 h-5" fill="none"
                                                             stroke="currentColor" viewBox="0 0 24 24"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +171,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                    {{-- {{ $anggota }} --}}
                                     @if ($anggota)
                                         @if ($anggota->parent_id)
                                             <p class="text-red-600 font-semibold text-sm">NIK ini sudah bergabung di
@@ -215,7 +214,7 @@
                                                             <h1>{{ $anggota->nama }}</h1>
                                                         </div>
                                                         <button
-                                                            class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Add</button>
+                                                            class="p-1.5 bg-gray-600 text-white rounded px-4 text-sm float-right my-2">Tambah</button>
                                                     </form>
                                                 </div>
                                             @endif

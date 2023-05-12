@@ -41,7 +41,7 @@ class ParticipantController extends Controller
             'nohp'              => $request->nohp,
         ]);
 
-        return redirect()->route('participants.index')->with('message', 'Participant successfully Created');
+        return redirect()->route('participants.index')->with('message', 'Participant Berhasil Disimpan');
     }
 
     /**
@@ -71,7 +71,7 @@ class ParticipantController extends Controller
         ]);
 
         $participant->update($updateparticipant);
-        return redirect()->route('participants.index')->with('message', 'Participant Successfully Updated');
+        return redirect()->route('participants.index')->with('message', 'Participant Berhasil Diperbaharui');
     }
 
     /**
@@ -83,12 +83,12 @@ class ParticipantController extends Controller
             $hasRelatedSupportData = Support::where('participant_id', $participant->id)->exists();
 
             if ($hasRelatedSupportData) {
-                return back()->with('success', 'User has related supports and cannot be deleted');
+                return back()->with('success', 'Participant Tidak Dapat Dihapus Karena Terelasi Dengan Data Support Lainnya');
             }
 
             $participant->delete();
 
-            return back()->with('success', 'Participant Successfully Deleted');
+            return back()->with('success', 'Participant Berhasil Dihapus');
         }
     }
 

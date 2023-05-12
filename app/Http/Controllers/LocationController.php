@@ -41,7 +41,7 @@ class LocationController extends Controller
             'alamat'            => $request->alamat,
         ]);
 
-        return redirect()->route('locations.index')->with('message', 'Location Successfully Created');
+        return redirect()->route('locations.index')->with('message', 'Location Berhasil Disimpan');
     }
 
     /**
@@ -71,7 +71,7 @@ class LocationController extends Controller
         ]);
 
         $location->update($updatelocation);
-        return redirect()->route('locations.index')->with('message', 'Location Successfully Updated');
+        return redirect()->route('locations.index')->with('message', 'Location Berhasil Diperbaharui');
     }
 
     /**
@@ -83,12 +83,12 @@ class LocationController extends Controller
             $hasRelatedSupportData = Support::where('location_id', $location->id)->exists();
 
             if ($hasRelatedSupportData) {
-                return back()->with('success', 'User has related supports and cannot be deleted');
+                return back()->with('success', 'Lokasi TPS Tidak Dapat Dihapus Karena Terelasi Dengan Data Support Lainnya');
             }
 
             $location->delete();
 
-            return back()->with('success', 'Location Successfully Deleted');
+            return back()->with('success', 'Location Berhasil Dihapus');
         }
     }
 

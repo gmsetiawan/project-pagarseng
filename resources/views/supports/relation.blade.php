@@ -1,20 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Relation Support') }}
+            {{ __('Form Tambah Relasi Support') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-2">
+            <div class="mb-2 p-4 bg-red-300 rounded">
                 <p>Anda akan melakukan penginputan berelasi dengan NIK <span
-                        class="font-semibold text-red-400">{{ $support->nik }}</span> bernama
-                    <span class="font-semibold text-red-400">{{ $support->nama }}</span>
+                        class="font-semibold">{{ $support->nik }}</span> bernama
+                    <span class="font-semibold">{{ $support->nama }}</span>
                 </p>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+                <div class="p-6 bg-white border-b">
                     <form action="{{ route('supports.storerelation', $support->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
@@ -89,7 +89,7 @@
                                     Kabupaten
                                 </label>
                                 <select id="kabupaten-dropdown" name="kabupaten"
-                                    class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                     <option value="">-- Pilih Kabupaten --</option>
                                     @foreach ($kabupatens as $data)
                                         <option value="{{ $data->id }}">
@@ -107,7 +107,7 @@
                                     Kecamatan
                                 </label>
                                 <select id="kecamatan-dropdown" name="kecamatan"
-                                    class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 </select>
                                 @error('kecamatan')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -119,7 +119,7 @@
                                     Kelurahan / Kampung
                                 </label>
                                 <select id="kelurahan-dropdown" name="kelurahan"
-                                    class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 </select>
                                 @error('kelurahan')
                                     <small class="alert alert-danger text-red-600">{{ $message }}</small>
@@ -150,55 +150,50 @@
                         <div class="relative w-full mb-2">
                             <h3 class="uppercase text-xs font-bold mb-2">Rating Kepercayaan</h3>
                             <ul
-                                class="items-center w-96 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <li
-                                    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                class="items-center w-96 text-sm font-medium border rounded sm:flex bg-gray-700 border-gray-600 text-white">
+                                <li class="w-full border-b sm:border-b-0 sm:border-r border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-license" type="radio" value="1"
                                             checked name="rating" name="list-radio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500">
                                         <label for="horizontal-list-radio-license"
-                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">1</label>
+                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-300">1</label>
                                     </div>
                                 </li>
-                                <li
-                                    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                <li class="w-full border-b sm:border-b-0 sm:border-r border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-id" type="radio" value="2"
                                             name="rating" name="list-radio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500">
                                         <label for="horizontal-list-radio-id"
-                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">2</label>
+                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-300">2</label>
                                     </div>
                                 </li>
-                                <li
-                                    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                <li class="w-full border-b sm:border-b-0 sm:border-r border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-millitary" type="radio" value="3"
                                             name="rating" name="list-radio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500">
                                         <label for="horizontal-list-radio-millitary"
-                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">3</label>
+                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-300">3</label>
                                     </div>
                                 </li>
-                                <li
-                                    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                <li class="w-full border-b sm:border-b-0 sm:border-r border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-passport" type="radio" value="4"
                                             name="rating" name="list-radio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500">
                                         <label for="horizontal-list-radio-passport"
-                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">4</label>
+                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-300">4</label>
                                     </div>
                                 </li>
-                                <li
-                                    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                <li class="w-full border-b sm:border-b-0 sm:border-r border-gray-600">
                                     <div class="flex items-center pl-3">
                                         <input id="horizontal-list-radio-passport" type="radio" value="5"
                                             name="rating" name="list-radio"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            class="w-4 h-4 text-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500">
                                         <label for="horizontal-list-radio-passport"
-                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">5</label>
+                                            class="w-full py-3 ml-2 text-sm font-medium text-gray-300">5</label>
                                     </div>
                                 </li>
                             </ul>
@@ -209,7 +204,7 @@
                                 TPS
                             </label>
                             <select id="location" name="location"
-                                class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Pilihan</option>
                                 @foreach ($locations as $location)
                                     <option value="{{ $location->id }}">{{ $location->nama }}</option>
@@ -224,7 +219,7 @@
                                 Sumber Data Dari
                             </label>
                             <select id="participant" name="participant"
-                                class="bg-gray-50 px-3 py-3 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" selected>Pilihan</option>
                                 @foreach ($participants as $participant)
                                     <option value="{{ $participant->id }}">{{ $participant->nama }}</option>

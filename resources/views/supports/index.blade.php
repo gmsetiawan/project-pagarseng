@@ -5,29 +5,28 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-4">
         <div class="max-w-[1600px] mx-auto sm:px-6 lg:px-8 flex flex-col gap-4">
             <a href="{{ route('supports.create') }}"
                 class="self-end p-2 text-white text-sm rounded bg-green-600 hover:bg-green-700">Tambah Support</a>
             <div>
                 <form action="{{ route('supports.search') }}" method="GET">
-                    <label for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <label for="default-search" class="mb-2 sr-only text-sm font-medium text-white">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
                         <input type="search" id="default-search" name="search"
-                            class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block w-full p-4 pl-10 text-sm border rounded bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Search By NIK, Nama..." required>
                         <button type="submit"
-                            class="text-white absolute right-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            class="text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded text-sm px-4 py-2 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
+                            <svg aria-hidden="true" class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -36,12 +35,9 @@
                 </form>
             </div>
             <div class="relative overflow-x-auto shadow-md rounded">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
-                            {{-- <th scope="col" class="px-6 py-3">
-                                NO
-                            </th> --}}
                             <th scope="col" class="px-6 py-3">
                                 NIK
                             </th>
@@ -79,18 +75,12 @@
                     </thead>
                     <tbody>
                         @forelse ($supports as $support)
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                {{-- <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $loop->iteration }}
-                                </th> --}}
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                            <tr class="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap">
                                     @if ($support->rating === 5)
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                     class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
                                                     viewBox="0 0 16 16">
                                                     <path
@@ -101,7 +91,7 @@
                                     @elseif ($support->rating === 4)
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                     class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
                                                     viewBox="0 0 16 16">
                                                     <path
@@ -112,7 +102,7 @@
                                     @elseif ($support->rating === 3)
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                     class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
                                                     viewBox="0 0 16 16">
                                                     <path
@@ -123,7 +113,7 @@
                                     @elseif ($support->rating === 2)
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                     class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
                                                     viewBox="0 0 16 16">
                                                     <path
@@ -134,7 +124,7 @@
                                     @elseif ($support->rating === 1)
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                     class="text-yellow-400" fill="currentColor"
                                                     class="bi bi-star-fill" viewBox="0 0 16 16">
                                                     <path
@@ -172,23 +162,25 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{-- {{ $families[0]->id }} --}}
                                     @if ($support->children->isEmpty())
-                                        {{-- @if ($support->children)
-                                            @forelse ($support->children as $item)
-                                                <h1>{{ $item->id }}</h1>
-                                            @empty
-                                                {{ __('Anggota') }}
-                                            @endforelse
-                                        @else
-                                        @endif --}}
-                                        <h1>{{ __('Perorangan') }}</h1>
+                                        <h1>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                            </svg>
+                                        </h1>
                                     @else
-                                        <a class="text-yellow-400 hover:text-yellow-600"
-                                            href="{{ route('supports.showfamily', $support->id) }}">{{ __('Keluarga - ' . $support->children->count()) }}</a>
+                                        <a class="text-yellow-400 hover:text-yellow-600 inline-flex items-center gap-1"
+                                            href="{{ route('supports.showfamily', $support->id) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                            </svg>
+                                            {{ __('- ' . $support->children->count()) }}
+                                        </a>
                                     @endif
-
-                                    {{-- {{ $families }} --}}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($support->scanktp === null)
@@ -212,7 +204,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-right flex flex-col gap-2">
                                     <a href="{{ route('supports.relation', $support->id) }}"
-                                        class="font-medium text-blue-400 hover:text-blue-600 hover:scale-125 duration-500">
+                                        class="font-medium text-white hover:scale-125 duration-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
                                             <path
@@ -247,7 +239,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="font-medium text-white hover:text-red-400 hover:scale-125 duration-500">
+                                            class="font-medium text-red-400 hover:text-red-600 hover:scale-125 duration-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path
@@ -260,20 +252,19 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
                                 <th scope="row" colspan="14"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    class="px-6 py-4 font-medium whitespace-nowrap text-white">
                                     Data Kosong! Silahkan lakukan penginputan data dan pastikan data participant
                                     sudah dilakukan penginputan terlebih dahulu.
                                 </th>
                             </tr>
                         @endforelse
                     </tbody>
-                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tfoot class="text-xs uppercase bg-gray-700 text-gray-100 font-semibold">
                         <tr>
                             <th scope="row" colspan="14" class="px-6 py-3">
-                                Total Data Terkumpul {{ $totalData->count() }}
+                                Total Support {{ $totalData->count() }}
                             </th>
                         </tr>
                     </tfoot>

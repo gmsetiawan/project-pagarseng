@@ -7,14 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- <div class="mb-4">
-                {{ $reviews }}
-                @foreach ($reviews as $review)
-                    <h1>Percentage: {{ $review->count }} - {{ $total }} - {{ ($review->count / 100) * $total }}
-                    </h1>
-                @endforeach
-            </div> --}}
-
             <div class="grid grid-cols-2 gap-2 mb-4">
                 <div class="p-4 rounded bg-slate-200">
                     <div class="flex justify-between items-center gap-2">
@@ -42,7 +34,6 @@
                             </div>
                             @foreach ($kecratings as $kecrating)
                                 @if ($kecrating->kecamatan_id == $kecamatan->id)
-                                    {{-- <p>{{ $rating->average_rating }} - {{ $rating->rating_count }}</p> --}}
                                     <div class="flex items-center justify-end gap-2">
                                         <h1 class="font-semibold">
                                             {{ number_format(($kecrating->sum_rating / $kecrating->rating_count) * 100) / 5 }}%
@@ -107,26 +98,6 @@
 
             </div>
             <div class="grid grid-cols-2 gap-4">
-                {{-- <div class="p-4 rounded bg-slate-200">
-                    <h1 class="font-semibold rounded mb-2">Jumlah terdaftar berdasarkan kecamatan</h1>
-                    @forelse ($kecamatans as $kecamatan)
-                        <div class="flex justify-between items-center">
-                            <h1>{{ $kecamatan->nama }}</h1>
-                            <h1>{{ $kecamatan->supports_count }}</h1>
-                        </div>
-                    @empty
-                    @endforelse
-                </div>
-                <div class="p-4 rounded bg-slate-200">
-                    <h1 class="font-semibold rounded mb-2">Jumlah terdaftar berdasarkan kelurahan</h1>
-                    @forelse ($kelurahans as $kelurahan)
-                        <div class="flex justify-between items-center">
-                            <h1>{{ $kelurahan->nama }}</h1>
-                            <h1>{{ $kelurahan->supports_count }}</h1>
-                        </div>
-                    @empty
-                    @endforelse
-                </div> --}}
                 <div class="p-4 rounded bg-slate-200">
                     <div class="flex justify-between items-center gap-2">
                         <h1 class="font-semibold rounded mb-2">Jumlah terdaftar berdasarkan kalkulasi sumber data</h1>

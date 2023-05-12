@@ -27,12 +27,6 @@ class DashboardController extends Controller
 
         $participants = Participant::withCount('supports')->take(5)->get();
 
-        // $reviews = Support::select('rating', DB::raw('count(kecamatan_id) as count'))
-        //     ->groupBy('rating')
-        //     ->get();
-
-        // $total = $reviews->sum('count');
-
         return view('dashboard', compact('kecamatans', 'kelurahans', 'participants', 'kecratings', 'kelratings'));
     }
 }
