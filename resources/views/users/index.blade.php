@@ -23,7 +23,7 @@
                         </div>
                         <input type="search" id="default-search" name="search"
                             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Masukan nama atau email..." required>
+                            placeholder="Masukan nama atau email" required>
                         <button type="submit"
                             class="text-white absolute right-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded text-sm px-4 py-2 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
                             <svg aria-hidden="true" class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -63,7 +63,7 @@
                                 </td>
                                 <td class="px-6 py-4 flex justify-end items-center gap-2">
                                     <a href="{{ route('users.edit', $user->id) }}"
-                                        class="font-medium text-white hover:text-green-400 hover:scale-125 duration-500">
+                                        class="font-medium text-yellow-400 hover:text-yellow-600 hover:scale-125 duration-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
@@ -79,7 +79,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="font-medium text-white hover:text-red-400 hover:scale-125 duration-500">
+                                            class="font-medium text-red-400 hover:text-red-600 hover:scale-125 duration-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path
