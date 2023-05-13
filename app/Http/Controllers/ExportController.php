@@ -9,8 +9,11 @@ use App\Models\Location;
 use App\Models\Participant;
 use App\Models\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Rap2hpoutre\FastExcel\SheetCollection;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 
 class ExportController extends Controller
 {
@@ -70,8 +73,28 @@ class ExportController extends Controller
             'Participant' => Participant::all()
 
         ]);
-        (new FastExcel($sheets))->export($filename);
 
-        return redirect()->back()->with('success', 'Export Data Support Berhasil');
+        // (new FastExcel($sheets))->export($filename);
+        // return redirect()->back()->with('success', 'Export Data Support Berhasil');
+
+        $tempFilePath = storage_path('app/public/temp.xlsx');
+
+        (new FastExcel($sheets))->export($tempFilePath);
+
+        $fileStream = fopen($tempFilePath, 'r');
+        $fileSize = filesize($tempFilePath);
+
+        $response = response()->stream(function () use ($fileStream) {
+            fpassthru($fileStream);
+            fclose($fileStream);
+        }, 200, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Length' => $fileSize,
+            'Content-Disposition' => 'attachment; filename=' . $filename,
+        ]);
+
+        File::delete($tempFilePath);
+
+        return $response;
     }
 }
