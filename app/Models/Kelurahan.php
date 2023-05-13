@@ -22,4 +22,14 @@ class Kelurahan extends Model
     {
         return $this->hasMany(Support::class);
     }
+
+    /**
+     * Get the kecamatan that owns the Kelurahan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
 }

@@ -22,4 +22,14 @@ class Kabupaten extends Model
     {
         return $this->hasMany(Support::class);
     }
+
+    /**
+     * Get all of the kecamatans for the Kabupaten
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function kecamatans()
+    {
+        return $this->hasMany(Kecamatan::class);
+    }
 }

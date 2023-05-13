@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kabupaten;
 use App\Models\Support;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,209 +14,18 @@ class SupportSeeder extends Seeder
      */
     public function run(): void
     {
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000001',
-            'nama'                  => 'Nama 1',
-            'alamat'                => 'Jl. Alamat 1',
-            'rt'                    => '1',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 1,
-            'kelurahan_id'          => 1,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010001',
-            'keterangan'            => null,
-            'rating'                => 5,
-            'location_id'           => null,
-            'participant_id'        => 1,
-            'user_id'               => 1,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000002',
-            'nama'                  => 'Nama 2',
-            'alamat'                => 'Jl. Alamat 2',
-            'rt'                    => '1',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 1,
-            'kelurahan_id'          => 1,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010002',
-            'keterangan'            => null,
-            'rating'                => 5,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 1,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000003',
-            'nama'                  => 'Nama 3',
-            'alamat'                => 'Jl. Alamat 3',
-            'rt'                    => '1',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 1,
-            'kelurahan_id'          => 2,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010003',
-            'keterangan'            => null,
-            'rating'                => 5,
-            'location_id'           => null,
-            'participant_id'        => 3,
-            'user_id'               => 1,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000004',
-            'nama'                  => 'Nama 4',
-            'alamat'                => 'Jl. Alamat 4',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 9,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010004',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 4,
-            'user_id'               => 1,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000005',
-            'nama'                  => 'Nama 5',
-            'alamat'                => 'Jl. Alamat 5',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 10,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010005',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 1,
-            'user_id'               => 1,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000006',
-            'nama'                  => 'Nama 6',
-            'alamat'                => 'Jl. Alamat 6',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010006',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000007',
-            'nama'                  => 'Nama 7',
-            'alamat'                => 'Jl. Alamat 7',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010007',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000008',
-            'nama'                  => 'Nama 8',
-            'alamat'                => 'Jl. Alamat 8',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010008',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000009',
-            'nama'                  => 'Nama 9',
-            'alamat'                => 'Jl. Alamat 9',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010009',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000010',
-            'nama'                  => 'Nama 10',
-            'alamat'                => 'Jl. Alamat 10',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010010',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000011',
-            'nama'                  => 'Nama 11',
-            'alamat'                => 'Jl. Alamat 11',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010011',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
-        Support::create([
-            'parent_id'             => null,
-            'nik'                   => '1234567890000012',
-            'nama'                  => 'Nama 12',
-            'alamat'                => 'Jl. Alamat 12',
-            'rt'                    => '4',
-            'kabupaten_id'          => 1,
-            'kecamatan_id'          => 2,
-            'kelurahan_id'          => 11,
-            'scanktp'               => 'example.jpg',
-            'nohp'                  => '081200010012',
-            'keterangan'            => null,
-            'rating'                => 4,
-            'location_id'           => null,
-            'participant_id'        => 2,
-            'user_id'               => 2,
-        ]);
+        $supportCount = 500;
+
+        Support::factory($supportCount)->create()->each(function ($support) {
+            $kabupaten = Kabupaten::inRandomOrder()->first();
+            $kecamatan = $kabupaten->kecamatans()->inRandomOrder()->first();
+            $kelurahan = $kecamatan->kelurahans()->inRandomOrder()->first();
+
+            $support->kabupaten()->associate($kabupaten);
+            $support->kecamatan()->associate($kecamatan);
+            $support->kelurahan()->associate($kelurahan);
+
+            $support->save();
+        });
     }
 }
