@@ -3,6 +3,7 @@
 use App\Http\Controllers\CalculationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ParticipantController;
@@ -62,17 +63,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     route::resource('locations', LocationController::class);
     route::get('/search/location', [LocationController::class, 'search'])->name('locations.search');
 
-
     route::get('show/data/kecamatans', [CalculationController::class, 'showallKecamatan'])->name('data.kecamatans');
     route::get('show/data/kelurahans', [CalculationController::class, 'showallKelurahan'])->name('data.kelurahans');
     route::get('show/data/participants', [CalculationController::class, 'showallParticipant'])->name('data.participants');
-
 
     Route::get('/dropdown', [DropdownController::class, 'index']);
     Route::post('api/fetch-kecamatan', [DropdownController::class, 'fetchKecamatan']);
     Route::post('api/fetch-kelurahan', [DropdownController::class, 'fetchKelurahan']);
 
     Route::get('api/fetch-support', [SupportController::class, 'searchSupportByNIK']);
+
+    Route::get('/supports-export', [ExportController::class, 'exportSupport'])->name('exportSupport');
 });
 
 require __DIR__ . '/auth.php';

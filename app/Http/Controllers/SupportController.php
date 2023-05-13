@@ -272,7 +272,7 @@ class SupportController extends Controller
             ]);
         }
 
-        return redirect()->route('supports.index')->with('message', 'Support Berhasil Disimpan');
+        return redirect()->route('supports.index')->with('success', 'Support Berhasil Disimpan');
     }
 
     public function search(Request $request)
@@ -285,7 +285,7 @@ class SupportController extends Controller
                         ->orWhere('nama', 'like', "%{$request->search}%");
                 }
             )
-            ->simplePaginate(5);
+            ->paginate(10);
         return view('supports.search', compact('supports'));
     }
 

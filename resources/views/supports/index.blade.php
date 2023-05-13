@@ -7,6 +7,8 @@
 
     <div class="py-4">
         <div class="max-w-[1600px] mx-auto sm:px-6 lg:px-8 flex flex-col gap-4">
+            <a href="{{ route('exportSupport') }}"
+                class="self-end p-2 text-white text-sm rounded bg-green-600 hover:bg-green-700">Export</a>
             <a href="{{ route('supports.create') }}"
                 class="self-end p-2 text-white text-sm rounded bg-green-600 hover:bg-green-700">Tambah Support</a>
             <div>
@@ -114,8 +116,8 @@
                                         <div class="flex gap-1 mb-1">
                                             @for ($i = 0; $i < $support->rating; $i++)
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
-                                                    class="text-yellow-400" fill="currentColor" class="bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
+                                                    class="text-yellow-400" fill="currentColor"
+                                                    class="bi bi-star-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                                 </svg>
