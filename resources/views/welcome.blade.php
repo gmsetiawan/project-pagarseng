@@ -2,6 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <h1>Project Gideon</h1>
     <h1 class="text-lg font-semibold">Selamat Datang</h1>
     <hr class="py-1 bg-orange-600 mb-4 rounded">
     <form method="POST" action="{{ route('login') }}">

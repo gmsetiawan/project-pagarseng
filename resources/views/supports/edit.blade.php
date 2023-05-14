@@ -25,7 +25,7 @@
                                 <label for="nik" class="block uppercase text-xs font-bold mb-2">
                                     NIK
                                 </label>
-                                <input type="text" id="nik" name="nik"
+                                <input type="number" id="nik" name="nik"
                                     value="{{ old('nik', $support->nik) }}"
                                     class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                                 @error('nik')
@@ -48,7 +48,7 @@
                                 <label for="nohp" class="block uppercase text-xs font-bold mb-2">
                                     No. Handphone
                                 </label>
-                                <input type="text" id="nohp" name="nohp"
+                                <input type="number" id="nohp" name="nohp"
                                     value="{{ old('nohp', $support->nohp) }}"
                                     class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                                 @error('nohp')
@@ -72,7 +72,7 @@
                                 <label for="rt" class="block uppercase text-xs font-bold mb-2">
                                     RT
                                 </label>
-                                <input type="text" id="rt" name="rt"
+                                <input type="number" id="rt" name="rt"
                                     value="{{ old('rt', $support->rt) }}"
                                     class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                                 @error('rt')
@@ -255,7 +255,7 @@
                             </label>
                             <select id="participant" name="participant"
                                 class="px-3 py-3 border text-sm rounded block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>Pilihan</option>
+                                <option value="">Pilihan</option>
                                 @foreach ($participants as $participant)
                                     <option value="{{ $participant->id }}"
                                         @if ($support->participant_id == $participant->id) selected='selected' @endif>

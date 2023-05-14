@@ -24,7 +24,7 @@ class SupportUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nik'               => ['required', Rule::unique(Support::class)->ignore($this->support->id)],
+            'nik'               => ['required', 'min:16', 'max:16', Rule::unique(Support::class)->ignore($this->support->id)],
             'nama'              => ['required', 'max:128'],
             'alamat'            => ['required', 'max:128'],
             'rt'                => ['required', 'min:1', 'max:2', 'regex:/^([0-9\s\-\+\(\)]*)$/'],

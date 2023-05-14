@@ -25,7 +25,7 @@
                             <label for="alamat" class="block uppercase text-xs font-bold mb-2">
                                 No. Handphone
                             </label>
-                            <input type="text" id="nohp" name="nohp" value="{{ old('nohp') }}"
+                            <input type="number" id="nohp" name="nohp" value="{{ old('nohp') }}"
                                 class="w-full px-3 py-3 rounded shadow focus:outline-none focus:ring-0">
                             @error('nohp')
                                 <small class="alert alert-danger text-red-600">{{ $message }}</small>

@@ -220,7 +220,7 @@ class SupportController extends Controller
             'nik'               => 'required|unique:supports|min:16|max:16',
             'nama'              => 'required|max:128',
             'alamat'            => 'required|max:128',
-            'rt'                => 'required|min:2|max:2|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'rt'                => 'required|min:1|max:2|regex:/^([0-9\s\-\+\(\)]*)$/',
             'kabupaten'         => 'required',
             'kecamatan'         => 'required',
             'kelurahan'         => 'required',
