@@ -141,7 +141,7 @@
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
                                     <h1 class="whitespace-nowrap">{{ $support->nama }}</h1>
-                                    <h1 class="whitespace-nowrap">{{ $support->nohp }}</h1>
+                                    <h1 class="whitespace-nowrap">{{ $support->nohp ? $support->nohp : '-' }}</h1>
                                     <h1>{{ $support->alamat }}</h1>
                                 </td>
                                 <td class="px-6 py-4">

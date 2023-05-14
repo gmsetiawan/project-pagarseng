@@ -32,7 +32,7 @@ class SupportUpdateRequest extends FormRequest
             'kecamatan'         => ['required'],
             'kelurahan'         => ['required'],
             'scanktp'           => ['image', 'mimes:jpeg,png,jpg', 'max:1024'],
-            'nohp'              => ['required', 'min:10', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'nohp'              => ['nullable', 'min:10', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
             'keterangan'        => ['nullable', 'max:128'],
             'rating'            => ['required'],
             'location'          => ['nullable'],

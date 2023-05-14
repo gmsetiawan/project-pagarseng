@@ -128,7 +128,7 @@
                                     </p>
                                 </div>
                                 <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                    {{ $support->nohp }}
+                                    {{ $support->nohp ? $support->nohp : '-' }}
                                 </div>
                             </div>
                         </li>

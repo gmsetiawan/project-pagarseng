@@ -115,7 +115,7 @@
                                 </th>
                                 <td class="px-6 py-4 font-semibold">
                                     <h1 class="whitespace-nowrap">{{ $family->nama }}</h1>
-                                    <h1>{{ $family->nohp }}</h1>
+                                    <h1>{{ $family->nohp ? $family->nohp : '-' }}</h1>
                                     <h1>{{ $family->alamat }}</h1>
                                 </td>
                                 <td class="px-6 py-4">
